@@ -1,0 +1,9 @@
+# Environment
+app1.env
+app2.env
+
+# Node
+**/node_modules
+
+# Logs
+*.log

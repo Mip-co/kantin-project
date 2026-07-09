@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Pesanan - Kantin Order</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="navbar">Kantin Order</div>
+
+  <div class="container">
+    <% if (error) { %>
+      <div class="error-box"><%= error %></div>
+    <% } %>
+
+    <div class="card">
+      <h2>Daftar Pesanan</h2>
+      <p><a href="/">&larr; Kembali ke daftar menu</a></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Menu</th>
+            <th>Qty</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td data-label="Menu"><%= order.nama_menu || '(menu sudah dihapus)' %></td>
+              <td data-label="Qty"><%= order.qty %></td>
+              <td data-label="Status">
+                <%
+                  let badgeClass = 'badge-diproses';
+                  if (order.status === 'Selesai') badgeClass = 'badge-selesai';
+                  if (order.status === 'Dibatalkan') badgeClass = 'badge-dibatalkan';
+                %>
+                <span class="badge <%= badgeClass %>"><%= order.status %></span>
+              </td>
+              <td data-label="Aksi">
+                <div class="action-group">
+                  <% if (order.status === 'Diproses') { %>
+                    <form action="/orders/<%= order.id %>/status" method="POST">
+                      <input type="hidden" name="status" value="Selesai">
+                      <button type="submit">Selesai</button>
+                    </form>
+                    <form action="/orders/<%= order.id %>/cancel" method="POST" onsubmit="return confirm('Batalkan pesanan ini?');">
+                      <button type="submit" class="danger">Batalkan</button>
+                    </form>
+                  <% } else { %>
+                    <span>-</span>
+                  <% } %>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+          <% if (orders.length === 0) { %>
+            <tr><td colspan="4">Belum ada pesanan.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

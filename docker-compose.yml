@@ -1,0 +1,18 @@
+services:
+  app1:
+    build: ./app1
+    container_name: kantin_admin
+    restart: unless-stopped
+    env_file:
+      - app1.env
+    ports:
+      - "127.0.0.1:3001:3001"   # hanya bind ke localhost, diakses lewat Nginx reverse proxy di host
+
+  app2:
+    build: ./app2
+    container_name: kantin_order
+    restart: unless-stopped
+    env_file:
+      - app2.env
+    ports:
+      - "127.0.0.1:3002:3002"   # hanya bind ke localhost, diakses lewat Nginx reverse proxy di host

@@ -1,0 +1,14 @@
+{
+  "name": "kantin-admin",
+  "version": "1.0.0",
+  "description": "App1 - Kantin Admin (kelola menu) untuk proyek Virtualisasi & Keamanan Jaringan",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ejs": "^3.1.10",
+    "mysql2": "^3.9.7"
+  }
+}
