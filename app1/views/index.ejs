@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kantin Admin</title>
-  <link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/admin/css/style.css">
 </head>
 <body>
   <div class="navbar">Kantin Admin</div>
@@ -16,31 +17,66 @@
 
     <div class="card">
       <h2><%= editMenu ? 'Edit Menu' : 'Tambah Menu' %></h2>
-      <form class="inline-form" action="<%= editMenu ? '/menus/' + editMenu.id : '/menus' %>" method="POST">
+
+      <form
+        class="inline-form"
+        action="<%= editMenu ? '/admin/menus/' + editMenu.id : '/admin/menus' %>"
+        method="POST"
+      >
         <div class="form-group">
           <label>Nama Menu</label>
-          <input type="text" name="nama_menu" required value="<%= editMenu ? editMenu.nama_menu : '' %>">
+          <input
+            type="text"
+            name="nama_menu"
+            required
+            value="<%= editMenu ? editMenu.nama_menu : '' %>"
+          >
         </div>
+
         <div class="form-group">
           <label>Harga</label>
-          <input type="number" name="harga" min="0" step="500" required value="<%= editMenu ? editMenu.harga : '' %>">
+          <input
+            type="number"
+            name="harga"
+            min="0"
+            step="500"
+            required
+            value="<%= editMenu ? editMenu.harga : '' %>"
+          >
         </div>
+
         <div class="form-group">
           <label>Status</label>
           <select name="status">
-            <option value="Tersedia" <%= editMenu && editMenu.status === 'Tersedia' ? 'selected' : '' %>>Tersedia</option>
-            <option value="Habis" <%= editMenu && editMenu.status === 'Habis' ? 'selected' : '' %>>Habis</option>
+            <option value="Tersedia"
+              <%= editMenu && editMenu.status === 'Tersedia' ? 'selected' : '' %>>
+              Tersedia
+            </option>
+
+            <option value="Habis"
+              <%= editMenu && editMenu.status === 'Habis' ? 'selected' : '' %>>
+              Habis
+            </option>
           </select>
         </div>
-        <button type="submit"><%= editMenu ? 'Simpan Perubahan' : 'Tambah Menu' %></button>
+
+        <button type="submit">
+          <%= editMenu ? 'Simpan Perubahan' : 'Tambah Menu' %>
+        </button>
+
         <% if (editMenu) { %>
-          <a href="/"><button type="button" class="secondary">Batal</button></a>
+          <a href="/admin">
+            <button type="button" class="secondary">
+              Batal
+            </button>
+          </a>
         <% } %>
       </form>
     </div>
 
     <div class="card">
       <h2>Daftar Menu</h2>
+
       <table>
         <thead>
           <tr>
@@ -50,29 +86,52 @@
             <th>Aksi</th>
           </tr>
         </thead>
+
         <tbody>
           <% menus.forEach(menu => { %>
             <tr>
-              <td data-label="Nama"><%= menu.nama_menu %></td>
-              <td data-label="Harga">Rp <%= Number(menu.harga).toLocaleString('id-ID') %></td>
+              <td data-label="Nama">
+                <%= menu.nama_menu %>
+              </td>
+
+              <td data-label="Harga">
+                Rp <%= Number(menu.harga).toLocaleString('id-ID') %>
+              </td>
+
               <td data-label="Status">
                 <span class="badge <%= menu.status === 'Tersedia' ? 'badge-tersedia' : 'badge-habis' %>">
                   <%= menu.status %>
                 </span>
               </td>
+
               <td data-label="Aksi">
                 <div class="action-group">
-                  <a href="/menus/<%= menu.id %>/edit"><button type="button">Edit</button></a>
-                  <form action="/menus/<%= menu.id %>/delete" method="POST" onsubmit="return confirm('Yakin hapus menu ini?');">
-                    <button type="submit" class="danger">Hapus</button>
+
+                  <a href="/admin/menus/<%= menu.id %>/edit">
+                    <button type="button">Edit</button>
+                  </a>
+
+                  <form
+                    action="/admin/menus/<%= menu.id %>/delete"
+                    method="POST"
+                    onsubmit="return confirm('Yakin hapus menu ini?');"
+                  >
+                    <button type="submit" class="danger">
+                      Hapus
+                    </button>
                   </form>
+
                 </div>
               </td>
             </tr>
           <% }) %>
+
           <% if (menus.length === 0) { %>
-            <tr><td colspan="4">Belum ada menu.</td></tr>
+            <tr>
+              <td colspan="4">Belum ada menu.</td>
+            </tr>
           <% } %>
+
         </tbody>
       </table>
     </div>
