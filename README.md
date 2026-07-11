@@ -42,17 +42,17 @@ Repository ini berisi implementasi dua aplikasi web sederhana yang berjalan meng
                │                 │
         ┌─────────────┐        MySQL
         │             │
-   Docker Compose
+    Docker Compose
         │
-   ┌──────────────┐
-   │              │
+    ┌──────────────┐
+    │              │
 App1 Admin    App2 Order
-   │              │
-   └──────┬───────┘
-          │
-     Nginx Reverse Proxy
-          │
-     Suricata IDS
+    │              │
+    └──────┬───────┘
+           │
+      Nginx Reverse Proxy
+           │
+      Suricata IDS
 
 
 ---
