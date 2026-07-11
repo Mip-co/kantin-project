@@ -29,18 +29,31 @@ Repository ini berisi implementasi dua aplikasi web sederhana yang berjalan meng
 
 # Topologi
 
-Internet
-↓
-MikroTik
-├── DMZ (Ubuntu Server)
-│ ├── Docker Compose
-│ ├── Kantin Admin
-│ ├── Kantin Order
-│ ├── Nginx
-│ └── Suricata
-│
-└── LAN (Ubuntu Server)
-└── MySQL
+                    Internet
+                        │
+                  MikroTik Router
+               ┌────────┴────────┐
+               │                 │
+             DMZ               LAN
+        7.7.7.0/30      192.168.56.0/24
+               │                 │
+        Ubuntu Server        Ubuntu Server
+          (DMZ)                 (LAN)
+               │                 │
+        ┌─────────────┐        MySQL
+        │             │
+   Docker Compose
+        │
+   ┌──────────────┐
+   │              │
+App1 Admin    App2 Order
+   │              │
+   └──────┬───────┘
+          │
+     Nginx Reverse Proxy
+          │
+     Suricata IDS
+
 
 ---
 
